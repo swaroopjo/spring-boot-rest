@@ -1,5 +1,5 @@
 steps:
-  - name: 'gcr.io/cloud-builders/maven'
+  - name: 'gcr.io/cloud-builders/maven:3.8.5'
     args: ['package']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/fresh-bloom-438819-i4/spring-boot-rest:${SHORT_SHA}', '.']
