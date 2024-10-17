@@ -7,7 +7,8 @@ steps:
     args: ['push', 'gcr.io/fresh-bloom-438819-i4/spring-boot-rest:${SHORT_SHA}']
 
 # Enable automatic regional log bucket creation
-logs_bucket: 'spring-boot-rest-log-bucket'
+options:
+  logging: CLOUD_LOGGING_ONLY
 
 images:
   - gcr.io/fresh-bloom-438819-i4/spring-boot-rest:${SHORT_SHA}
