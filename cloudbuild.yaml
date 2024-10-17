@@ -6,5 +6,9 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/fresh-bloom-438819-i4/spring-boot-rest:${SHORT_SHA}']
 
+# Enable automatic regional log bucket creation
+build_options:
+  logging: REGIONAL_USER_OWNED_BUCKET
+
 images:
   - gcr.io/fresh-bloom-438819-i4/spring-boot-rest:${SHORT_SHA}
