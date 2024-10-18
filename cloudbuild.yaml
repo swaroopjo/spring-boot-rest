@@ -3,8 +3,12 @@ steps:
     entrypoint: 'mvn'
     args: ['clean', 'package']
 
-  - name: 'gcr.io/google-appengine/gradle'
-    args: [ 'app', 'deploy', 'app.yaml' ]
+  - name: 'google/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+        - '-c'
+        - |
+          gcloud app deploy app.yaml --quiet
 
 # Enable automatic regional log bucket creation
 options:
