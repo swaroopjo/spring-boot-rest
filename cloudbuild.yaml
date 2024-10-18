@@ -3,6 +3,13 @@ steps:
     entrypoint: 'mvn'
     args: ['clean', 'package', '-DskipTests']
 
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/fresh-bloom-438819-i4/spring-boot-rest:${SHORT_SHA}'
+      - '.'
+
   - name: 'google/cloud-sdk'
     entrypoint: 'bash'
     args:
