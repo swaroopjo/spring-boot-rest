@@ -3,6 +3,9 @@ steps:
     entrypoint: 'mvn'
     args: ['clean', 'package']
 
+  - name: 'gcr.io/google-appengine/gradle'
+    args: [ 'app', 'deploy', 'app.yaml' ]
+
 # Enable automatic regional log bucket creation
 options:
   logging: CLOUD_LOGGING_ONLY
