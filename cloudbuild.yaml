@@ -8,6 +8,8 @@ steps:
       - 'build'
       - '-t'
       - 'gcr.io/fresh-bloom-438819-i4/spring-boot-rest:${SHORT_SHA}'
+      - '-f'
+      - './Dockerfile'
       - '.'
 
   - name: 'google/cloud-sdk'
