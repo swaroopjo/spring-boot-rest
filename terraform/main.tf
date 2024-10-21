@@ -6,6 +6,7 @@ resource "google_apigee_organization" "my_org" {
 resource "google_apigee_environment" "my_env" {
   organization = google_apigee_organization.my_org.name
   name         = var.apigee_env_name
+  org_id       = var.apigee_org_id
 }
 
 resource "google_apigee_api_proxy" "my_api_proxy" {

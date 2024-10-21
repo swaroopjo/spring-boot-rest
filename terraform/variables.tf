@@ -13,6 +13,11 @@ variable "apigee_org_name" {
   type        = string
 }
 
+variable "apigee_org_id" {
+  description = "Name of the Organization ID"
+  type        = string
+}
+
 variable "apigee_env_name" {
   description = "Name of the Apigee environment"
   type        = string
