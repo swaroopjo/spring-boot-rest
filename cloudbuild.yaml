@@ -25,7 +25,7 @@ steps:
     args:
       - '-c'
       - |
-        cd terraform && terraform init && terraform apply -auto-approve -var-file='terraform.tfvars' || { echo 'Terraform apply failed' ; exit 1; }
+        cd terraform && terraform init -upgrade && terraform plan -var-file='terraform.tfvars' && terraform apply -auto-approve -var-file='terraform.tfvars' || { echo 'Terraform apply failed' ; exit 1; }
 
 options:
   logging: CLOUD_LOGGING_ONLY
