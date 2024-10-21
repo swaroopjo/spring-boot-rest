@@ -27,6 +27,27 @@ steps:
       - |
         cd terraform && terraform init -upgrade && terraform plan -var-file='terraform.tfvars' && terraform apply -auto-approve -var-file='terraform.tfvars' || { echo 'Terraform apply failed' ; exit 1; }
 
+  # Package the proxy files
+  - name: 'gcr.io/cloud-builders/gsutil'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        zip -r proxy.zip proxy/ || { echo 'Zipping failed'; exit 1; }
+
+  # Deploy API Proxy to Apigee
+  - name: 'curlimages/curl'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        curl -X POST \
+        -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+        -H "Content-Type: application/octet-stream" \
+        --data-binary @proxy.zip \
+        "https://api.enterprise.apigee.com/v1/organizations/YOUR_ORG_NAME/apis?action=deploy" || { echo 'API proxy deployment failed'; exit 1; }
+
+
 options:
   logging: CLOUD_LOGGING_ONLY
 

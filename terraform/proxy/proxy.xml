@@ -1,5 +1,18 @@
 <APIProxy name="my-api-proxy">
     <Description>A simple API proxy for my Spring Boot app</Description>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>VerifyAPIKey</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <Policies>
+        <VerifyAPIKey name="VerifyAPIKey">
+            <APIKey>request.queryparam.apikey</APIKey> <!-- or use request.header.x-api-key -->
+        </VerifyAPIKey>
+    </Policies>
     <ProxyEndpoints>
         <ProxyEndpoint name="default">
             <PreFlow>
