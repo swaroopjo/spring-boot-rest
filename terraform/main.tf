@@ -4,13 +4,12 @@ resource "google_apigee_organization" "my_org" {
 }
 
 resource "google_apigee_environment" "my_env" {
-  organization = google_apigee_organization.my_org.name
+  org_id = google_apigee_organization.my_org.id
   name         = var.apigee_env_name
-  org_id       = var.apigee_org_id
 }
 
 resource "google_apigee_api_proxy" "my_api_proxy" {
-  organization = google_apigee_organization.my_org.name
+  organization = google_apigee_organization.my_org.id
   name         = var.api_proxy_name
 
   api_proxy_configuration {

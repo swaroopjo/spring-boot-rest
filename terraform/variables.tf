@@ -21,7 +21,6 @@ variable "apigee_org_id" {
 variable "apigee_env_name" {
   description = "Name of the Apigee environment"
   type        = string
-  default     = "dev"
 }
 
 variable "api_proxy_name" {
