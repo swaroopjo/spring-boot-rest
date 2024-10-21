@@ -1,5 +1,6 @@
 resource "google_apigee_organization" "my_org" {
   display_name = var.apigee_org_name
+   project_id   = var.project_id
 }
 
 resource "google_apigee_environment" "my_env" {
