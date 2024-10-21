@@ -1,15 +1,16 @@
-resource "google_apigee_organization" "my_org" {
+
+resource "apigee_organization" "my_org" {
   display_name = var.apigee_org_name
-   project_id   = var.project_id
+  project_id   = var.project_id
 }
 
-resource "google_apigee_environment" "my_env" {
-  org_id = google_apigee_organization.my_org.id
+resource "apigee_environment" "my_env" {
+  org_id = apigee_organization.my_org.id
   name         = var.apigee_env_name
 }
 
-resource "google_apigee_api_proxy" "my_api_proxy" {
-  organization = google_apigee_organization.my_org.id
+resource "apigee_api_proxy" "my_api_proxy" {
+  organization = apigee_organization.my_org.id
   name         = var.api_proxy_name
 
   api_proxy_configuration {
