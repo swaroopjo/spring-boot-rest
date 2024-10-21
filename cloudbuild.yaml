@@ -15,11 +15,26 @@ steps:
   - name: 'google/cloud-sdk'
     entrypoint: 'bash'
     args:
-        - '-c'
-        - |
-          gcloud app deploy app.yaml --quiet
+      - '-c'
+      - |
+        gcloud app deploy app.yaml --quiet || { echo 'Deployment failed' ; exit 1; }
 
-# Enable automatic regional log bucket creation
+  # Deploy API to Apigee
+  - name: 'google/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud apigee api-proxies deploy --name your-api-proxy-name --quiet || { echo 'API deployment failed' ; exit 1; }
+
+  # Terraform step (initialize and apply)
+  - name: 'hashicorp/terraform:latest'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        cd terraform-directory && terraform init && terraform apply -auto-approve || { echo 'Terraform apply failed' ; exit 1; }
+
 options:
   logging: CLOUD_LOGGING_ONLY
 
