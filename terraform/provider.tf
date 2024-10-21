@@ -4,5 +4,5 @@ provider "google" {
 }
 
 provider "apigee" {
-  org = google_apigee_organization.my_org.display_name
+  org = apigee_organization.my_org.display_name
 }
