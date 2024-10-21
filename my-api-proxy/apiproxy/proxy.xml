@@ -1,0 +1,52 @@
+<APIProxy name="my-api-proxy">
+    <Description>A simple API proxy for my Spring Boot app</Description>
+    <ProxyEndpoints>
+        <ProxyEndpoint name="default">
+            <PreFlow>
+                <Request>
+                    <Step>
+                        <Name>log-request-response</Name>
+                    </Step>
+                </Request>
+                <Response>
+                    <Step>
+                        <Name>log-request-response</Name>
+                    </Step>
+                </Response>
+            </PreFlow>
+            <Flows>
+                <Flow name="default">
+                    <Request>
+                        <Step>
+                            <Name>log-request-response</Name>
+                        </Step>
+                    </Request>
+                    <Response>
+                        <Step>
+                            <Name>log-request-response</Name>
+                        </Step>
+                    </Response>
+                </Flow>
+            </Flows>
+            <PostFlow>
+                <Request>
+                    <!-- Add post-request policies here if needed -->
+                </Request>
+                <Response>
+                    <!-- Add post-response policies here if needed -->
+                </Response>
+            </PostFlow>
+            <HTTPProxyConnection>
+                <BasePath>/v1/myapi</BasePath>
+                <VirtualHost>default</VirtualHost>
+            </HTTPProxyConnection>
+        </ProxyEndpoint>
+    </ProxyEndpoints>
+    <TargetEndpoints>
+        <TargetEndpoint name="default">
+            <HTTPTargetConnection>
+                <URL>https://fresh-bloom-438819-i4.uc.r.appspot.com/</URL>
+            </HTTPTargetConnection>
+        </TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

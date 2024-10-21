@@ -1,0 +1,9 @@
+<Policy name="log-request-response" type="Request">
+    <Step>
+        <Name>log-request-response</Name>
+    </Step>
+    <LogMessage>
+        <Message>Request: {request}</Message>
+        <Message>Response: {response}</Message>
+    </LogMessage>
+</Policy>

@@ -1,0 +1,7 @@
+<TargetEndpoints>
+    <TargetEndpoint name="default">
+        <HTTPTargetConnection>
+            <URL>https://fresh-bloom-438819-i4.uc.r.appspot.com/</URL>
+        </HTTPTargetConnection>
+    </TargetEndpoint>
+</TargetEndpoints>
