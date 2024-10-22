@@ -1,5 +1,5 @@
 project_id      = "fresh-bloom-438819-i4"
 apigee_org_name = "fresh-bloom-438819-i4"
 api_proxy_name  = "spring-boot-rest-proxy"
-apigee_env_name = "test-env"
+apigee_env_name = "dev"
 apigee_org_id = "fresh-bloom-438819-i4"
