@@ -1,11 +1,28 @@
-# Use a base image that includes JDK
-FROM eclipse-temurin:21-jdk
+FROM maven:3.9.9-eclipse-temurin-21-alpine as builder
+#RUN apt-get update && apt-get upgrade -y
+RUN apk update && apk upgrade --no-cache
 
-# Set the working directory
+# Copy local code to the container image.
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
 
-# Copy the packaged JAR file
-COPY target/*.jar app.jar
+# Build a release artifact.
+RUN mvn package -DskipTests
 
-# Specify the command to run the app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Use AdoptOpenJDK for base image.
+# It's important to use OpenJDK 8u191 or above that has container support enabled.
+# https://hub.docker.com/r/adoptopenjdk/openjdk8
+# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+#FROM eclipse-temurin:22-jre-alpine
+FROM eclipse-temurin:21.0.4_7-jre-alpine
+RUN apk update && apk upgrade --no-cache
+#RUN apk add spring-core
+# Copy the jar to the production image from the builder stage.
+COPY --from=builder /app/target/*.jar /app.jar
+
+# Run the web service on container startup.
+CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
+
+# [END run_helloworld_dockerfile]
+# [END cloudrun_helloworld_dockerfile]
